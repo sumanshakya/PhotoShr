@@ -1,0 +1,34 @@
+﻿@model PhotoShr.Models.group
+@{
+    ViewBag.Title = "group members";
+    var grp = (PhotoShr.Models.group)ViewBag.Group;
+    bool isMember = false;
+    if (ViewBag.IsMember != null)
+    {
+        isMember = (bool)ViewBag.IsMember;
+    }
+}
+
+<h1>@grp.collection.collection_name</h1>
+<p>
+    Total group member :<b> @grp.group_members.Count()</b>
+    Total photos in this group : @grp.collection.collection_photos.Count()
+</p>
+<hr />
+
+<ul class="nav nav-pills">
+    <li><a href="@Url.Content(string.Format("/Group/Details/{0}?view=photos", grp.id))">Photos</a></li>
+    <li><a href="@Url.Content(string.Format("/Group/Details/{0}?view=members", grp.id))">Members</a></li>
+    <li class="active"><a href="@Url.Content(string.Format("/Group/Details/{0}?view=about", grp.id))">About</a></li>
+    @if(Session["LoggedInUser"] != null && !isMember) {
+        <li class="pull-right"><a href="@Url.Content(string.Format("/Group/Details/{0}?view=join", grp.id))">Join this group</a></li>
+    } else if(Session["LoggedInUser"] != null && isMember) {
+        <li class="pull-right"><a href="@Url.Content(string.Format("/Group/Details/{0}?view=add", grp.id))">Add photo to group</a></li>
+    }
+</ul>
+@if (Model != null)
+{
+    <h2>About @Model.collection.collection_name</h2>
+    @Model.description   
+    
+}

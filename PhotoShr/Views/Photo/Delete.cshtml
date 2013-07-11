@@ -1,0 +1,29 @@
+﻿@model PhotoShr.Models.photo
+@{
+    ViewBag.Title = "Delete photo";
+}
+<h1>Delete</h1>
+<hr />
+<p>
+    Are you sure you want to delete this photo?
+    <ul>
+        <li>Photo will be deleted from all the collections (sets, stories, groups)</li>
+        <li>Photo will be delete from favorite list of other users</li>
+    </ul>
+</p>
+<div class="row">
+    <div class="span9">
+        <img src="@Url.Content(@Model.photo_url_o)" alt="@Model.name" />
+    </div>
+    <div class="span3 plan">
+        @using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Delete" class="btn btn-large btn-danger" />
+    </p>
+}
+
+    </div>
+</div>
+
+

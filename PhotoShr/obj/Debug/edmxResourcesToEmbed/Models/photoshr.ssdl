@@ -1,0 +1,623 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="photoshareModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="photoshareModelStoreContainer">
+    <EntitySet Name="category" EntityType="photoshareModel.Store.category" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="collection" EntityType="photoshareModel.Store.collection" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="collection_photos" EntityType="photoshareModel.Store.collection_photos" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="comments" EntityType="photoshareModel.Store.comments" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="exif_data" EntityType="photoshareModel.Store.exif_data" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="favorites" EntityType="photoshareModel.Store.favorites" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="followers" EntityType="photoshareModel.Store.followers" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="group_members" EntityType="photoshareModel.Store.group_members" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="groups" EntityType="photoshareModel.Store.groups" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="likes" EntityType="photoshareModel.Store.likes" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="membership" EntityType="photoshareModel.Store.membership" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="photo_comments" EntityType="photoshareModel.Store.photo_comments" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="photos" EntityType="photoshareModel.Store.photos" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="sets" EntityType="photoshareModel.Store.sets" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="stories" EntityType="photoshareModel.Store.stories" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="story_comments" EntityType="photoshareModel.Store.story_comments" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="user_activity" EntityType="photoshareModel.Store.user_activity" store:Type="Tables" Schema="photoshare" />
+    <EntitySet Name="users" EntityType="photoshareModel.Store.users" store:Type="Tables" Schema="photoshare" />
+    <AssociationSet Name="FK__collection" Association="photoshareModel.Store.FK__collection">
+      <End Role="collection" EntitySet="collection" />
+      <End Role="stories" EntitySet="stories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__collection_set" Association="photoshareModel.Store.FK__collection_set">
+      <End Role="collection" EntitySet="collection" />
+      <End Role="sets" EntitySet="sets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comments" Association="photoshareModel.Store.FK__comments">
+      <End Role="comments" EntitySet="comments" />
+      <End Role="story_comments" EntitySet="story_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__gm_users" Association="photoshareModel.Store.FK__gm_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__stories" Association="photoshareModel.Store.FK__stories">
+      <End Role="stories" EntitySet="stories" />
+      <End Role="story_comments" EntitySet="story_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__users" Association="photoshareModel.Store.FK__users">
+      <End Role="users" EntitySet="users" />
+      <End Role="followers" EntitySet="followers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__users_2" Association="photoshareModel.Store.FK__users_2">
+      <End Role="users" EntitySet="users" />
+      <End Role="followers" EntitySet="followers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_activity_photo" Association="photoshareModel.Store.fk_activity_photo">
+      <End Role="photos" EntitySet="photos" />
+      <End Role="user_activity" EntitySet="user_activity" />
+    </AssociationSet>
+    <AssociationSet Name="fk_activity_user" Association="photoshareModel.Store.fk_activity_user">
+      <End Role="users" EntitySet="users" />
+      <End Role="user_activity" EntitySet="user_activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_collection_users" Association="photoshareModel.Store.FK_collection_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="collection" EntitySet="collection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comments_users" Association="photoshareModel.Store.FK_comments_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_exif_data_photos" Association="photoshareModel.Store.FK_exif_data_photos">
+      <End Role="photos" EntitySet="photos" />
+      <End Role="exif_data" EntitySet="exif_data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_favorites_photos" Association="photoshareModel.Store.FK_favorites_photos">
+      <End Role="photos" EntitySet="photos" />
+      <End Role="favorites" EntitySet="favorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_favorites_users" Association="photoshareModel.Store.FK_favorites_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="favorites" EntitySet="favorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_group_members_groups" Association="photoshareModel.Store.FK_group_members_groups">
+      <End Role="groups" EntitySet="groups" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_group_photos_collection" Association="photoshareModel.Store.FK_group_photos_collection">
+      <End Role="collection" EntitySet="collection" />
+      <End Role="collection_photos" EntitySet="collection_photos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_group_photos_photos" Association="photoshareModel.Store.FK_group_photos_photos">
+      <End Role="photos" EntitySet="photos" />
+      <End Role="collection_photos" EntitySet="collection_photos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_groups_collection" Association="photoshareModel.Store.FK_groups_collection">
+      <End Role="collection" EntitySet="collection" />
+      <End Role="groups" EntitySet="groups" />
+    </AssociationSet>
+    <AssociationSet Name="fk_like_photo" Association="photoshareModel.Store.fk_like_photo">
+      <End Role="photos" EntitySet="photos" />
+      <End Role="likes" EntitySet="likes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_like_user" Association="photoshareModel.Store.fk_like_user">
+      <End Role="users" EntitySet="users" />
+      <End Role="likes" EntitySet="likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_photo_comments_comments" Association="photoshareModel.Store.FK_photo_comments_comments">
+      <End Role="comments" EntitySet="comments" />
+      <End Role="photo_comments" EntitySet="photo_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_photo_comments_photos" Association="photoshareModel.Store.FK_photo_comments_photos">
+      <End Role="photos" EntitySet="photos" />
+      <End Role="photo_comments" EntitySet="photo_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_photo_users" Association="photoshareModel.Store.FK_photo_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="photos" EntitySet="photos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_photos_category" Association="photoshareModel.Store.fk_photos_category">
+      <End Role="category" EntitySet="category" />
+      <End Role="photos" EntitySet="photos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_users_membership" Association="photoshareModel.Store.FK_users_membership">
+      <End Role="membership" EntitySet="membership" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="varchar" Nullable="false" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="collection">
+    <Key>
+      <PropertyRef Name="collection_id" />
+    </Key>
+    <Property Name="collection_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="collection_name" Type="text" Nullable="false" />
+    <Property Name="created_date" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="created_by" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="collection_photos">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="photo_id" />
+      <PropertyRef Name="collection_id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+    <Property Name="collection_id" Type="int" Nullable="false" />
+    <Property Name="added_on" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="comment_id" />
+    </Key>
+    <Property Name="comment_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="comment_datetime" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="comment_text" Type="text" />
+  </EntityType>
+  <EntityType Name="exif_data">
+    <Key>
+      <PropertyRef Name="exif_id" />
+    </Key>
+    <Property Name="exif_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+    <Property Name="camera" Type="varchar" MaxLength="250" />
+    <Property Name="aperture" Type="varchar" MaxLength="250" />
+    <Property Name="shutter_speed" Type="varchar" MaxLength="250" />
+    <Property Name="iso" Type="varchar" MaxLength="250" />
+    <Property Name="date_taken" Type="varchar" MaxLength="250" />
+    <Property Name="focal_length" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="favorites">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="photo_id" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="fav_datetime" Type="timestamp" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="followers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="follower_who" Type="int" />
+    <Property Name="follower_whom" Type="int" />
+  </EntityType>
+  <EntityType Name="group_members">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="group_id" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="joined_date" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="groups">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="text" />
+    <Property Name="collection_id" Type="int" />
+  </EntityType>
+  <EntityType Name="likes">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="photo_id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+    <Property Name="like_datetime" Type="timestamp" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="membership">
+    <Key>
+      <PropertyRef Name="membership_id" />
+    </Key>
+    <Property Name="membership_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="is_approved" Type="enum" Nullable="false" />
+    <Property Name="joined_date" Type="timestamp" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="photo_comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="comment_id" Type="int" Nullable="false" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="photos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" MaxLength="200" />
+    <Property Name="description" Type="text" />
+    <Property Name="uploaded_date" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="photo_url_o" Type="text" Nullable="false" />
+    <Property Name="photo_url_m" Type="text" Nullable="false" />
+    <Property Name="photo_url_s" Type="text" Nullable="false" />
+    <Property Name="photo_category" Type="int" Nullable="false" />
+    <Property Name="tags" Type="text" />
+    <Property Name="views_count" Type="int" />
+    <Property Name="likes_count" Type="int" />
+    <Property Name="comments_count" Type="int" />
+    <Property Name="favs_count" Type="int" />
+    <Property Name="popularity" Type="float" />
+  </EntityType>
+  <EntityType Name="sets">
+    <Key>
+      <PropertyRef Name="set_id" />
+    </Key>
+    <Property Name="set_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="collection_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="stories">
+    <Key>
+      <PropertyRef Name="story_id" />
+    </Key>
+    <Property Name="story_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="collection_id" Type="int" Nullable="false" />
+    <Property Name="description" Type="text" Nullable="false" />
+    <Property Name="tags" Type="text" />
+  </EntityType>
+  <EntityType Name="story_comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="comment_id" Type="int" Nullable="false" />
+    <Property Name="story_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_activity">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="change_type" Type="enum" Nullable="false" />
+    <Property Name="activity_time" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="varchar" MaxLength="200" />
+    <Property Name="last_name" Type="varchar" MaxLength="200" />
+    <Property Name="about" Type="text" />
+    <Property Name="gender" Type="enum" Nullable="false" />
+    <Property Name="city" Type="varchar" MaxLength="200" />
+    <Property Name="country" Type="varchar" MaxLength="200" />
+    <Property Name="profile_photo" Type="varchar" MaxLength="250" />
+    <Property Name="membership_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__collection">
+    <End Role="collection" Type="photoshareModel.Store.collection" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="stories" Type="photoshareModel.Store.stories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="collection">
+        <PropertyRef Name="collection_id" />
+      </Principal>
+      <Dependent Role="stories">
+        <PropertyRef Name="collection_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__collection_set">
+    <End Role="collection" Type="photoshareModel.Store.collection" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="sets" Type="photoshareModel.Store.sets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="collection">
+        <PropertyRef Name="collection_id" />
+      </Principal>
+      <Dependent Role="sets">
+        <PropertyRef Name="collection_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comments">
+    <End Role="comments" Type="photoshareModel.Store.comments" Multiplicity="1" />
+    <End Role="story_comments" Type="photoshareModel.Store.story_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comments">
+        <PropertyRef Name="comment_id" />
+      </Principal>
+      <Dependent Role="story_comments">
+        <PropertyRef Name="comment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__gm_users">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1" />
+    <End Role="group_members" Type="photoshareModel.Store.group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__stories">
+    <End Role="stories" Type="photoshareModel.Store.stories" Multiplicity="1" />
+    <End Role="story_comments" Type="photoshareModel.Store.story_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stories">
+        <PropertyRef Name="story_id" />
+      </Principal>
+      <Dependent Role="story_comments">
+        <PropertyRef Name="story_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__users">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="0..1" />
+    <End Role="followers" Type="photoshareModel.Store.followers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="followers">
+        <PropertyRef Name="follower_who" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__users_2">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="0..1" />
+    <End Role="followers" Type="photoshareModel.Store.followers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="followers">
+        <PropertyRef Name="follower_whom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_activity_photo">
+    <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="user_activity" Type="photoshareModel.Store.user_activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="photos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_activity">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_activity_user">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1" />
+    <End Role="user_activity" Type="photoshareModel.Store.user_activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_activity">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_collection_users">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1" />
+    <End Role="collection" Type="photoshareModel.Store.collection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="collection">
+        <PropertyRef Name="created_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comments_users">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1" />
+    <End Role="comments" Type="photoshareModel.Store.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_exif_data_photos">
+    <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="1" />
+    <End Role="exif_data" Type="photoshareModel.Store.exif_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="photos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="exif_data">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_favorites_photos">
+    <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="1" />
+    <End Role="favorites" Type="photoshareModel.Store.favorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="photos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="favorites">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_favorites_users">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1" />
+    <End Role="favorites" Type="photoshareModel.Store.favorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="favorites">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_group_members_groups">
+    <End Role="groups" Type="photoshareModel.Store.groups" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="group_members" Type="photoshareModel.Store.group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="groups">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_group_photos_collection">
+    <End Role="collection" Type="photoshareModel.Store.collection" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="collection_photos" Type="photoshareModel.Store.collection_photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="collection">
+        <PropertyRef Name="collection_id" />
+      </Principal>
+      <Dependent Role="collection_photos">
+        <PropertyRef Name="collection_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_group_photos_photos">
+    <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="1" />
+    <End Role="collection_photos" Type="photoshareModel.Store.collection_photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="photos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="collection_photos">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_groups_collection">
+    <End Role="collection" Type="photoshareModel.Store.collection" Multiplicity="0..1" />
+    <End Role="groups" Type="photoshareModel.Store.groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="collection">
+        <PropertyRef Name="collection_id" />
+      </Principal>
+      <Dependent Role="groups">
+        <PropertyRef Name="collection_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_like_photo">
+    <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="1" />
+    <End Role="likes" Type="photoshareModel.Store.likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="photos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="likes">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_like_user">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1" />
+    <End Role="likes" Type="photoshareModel.Store.likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="likes">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_photo_comments_comments">
+    <End Role="comments" Type="photoshareModel.Store.comments" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="photo_comments" Type="photoshareModel.Store.photo_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comments">
+        <PropertyRef Name="comment_id" />
+      </Principal>
+      <Dependent Role="photo_comments">
+        <PropertyRef Name="comment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_photo_comments_photos">
+    <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="1" />
+    <End Role="photo_comments" Type="photoshareModel.Store.photo_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="photos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="photo_comments">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_photo_users">
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="photos">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_photos_category">
+    <End Role="category" Type="photoshareModel.Store.category" Multiplicity="1" />
+    <End Role="photos" Type="photoshareModel.Store.photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="photos">
+        <PropertyRef Name="photo_category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_users_membership">
+    <End Role="membership" Type="photoshareModel.Store.membership" Multiplicity="1" />
+    <End Role="users" Type="photoshareModel.Store.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="membership">
+        <PropertyRef Name="membership_id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="membership_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="spPhotoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="photoshare">
+    <Parameter Name="photoId" Type="int" Mode="In" />
+  </Function>
+</Schema>

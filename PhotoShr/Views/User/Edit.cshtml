@@ -1,0 +1,99 @@
+﻿@model PhotoShr.Models.user
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>user</legend>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.first_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.first_name)
+            @Html.ValidationMessageFor(model => model.first_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.last_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.last_name)
+            @Html.ValidationMessageFor(model => model.last_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.about)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.about)
+            @Html.ValidationMessageFor(model => model.about)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gender)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.gender)
+            @Html.ValidationMessageFor(model => model.gender)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.city)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.city)
+            @Html.ValidationMessageFor(model => model.city)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.country)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.country)
+            @Html.ValidationMessageFor(model => model.country)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.profile_photo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile_photo)
+            @Html.ValidationMessageFor(model => model.profile_photo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.is_contact)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.is_contact)
+            @Html.ValidationMessageFor(model => model.is_contact)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.membership_id, "membership")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("membership_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.membership_id)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

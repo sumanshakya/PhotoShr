@@ -1,0 +1,303 @@
+﻿@model PhotoShr.Models.photo
+@using PhotoShr.Models
+@{
+    ViewBag.Title = "Details";
+    user loggedInUser = (user)ViewBag.LoggedUser;
+}
+
+@section ExtraStyles {
+    <style>
+        .plan-name-silver {
+            padding: 5px 5px 5px 2px;
+            -moz-border-radius: 5px 5px 0 0;
+            -webkit-border-radius: 5px 5px 0 0;
+            border-radius: 5px 5px 0 0;
+            margin: 0,0,10px,0;
+            background-color: #f3f3f3;
+            box-shadow: 0 0 6px 2px #b0b2ab;
+        }
+
+        .plan ul {
+            list-style: none;
+            margin: 0;
+            -moz-border-radius: 0 0 5px 5px;
+            -webkit-border-radius: 0 0 5px 5px;
+            border-radius: 0 0 5px 5px;
+            font-size: small;
+        }
+
+            .plan ul li.plan-feature {
+                padding: 5px;
+                border-top: 1px solid #c5c8c0;
+            }
+    </style>
+}
+
+
+<ul class="nav nav-pills">
+    <li>
+        <h4>
+            @Model.name</h4>
+    </li>
+</ul>
+
+<div class="row">
+    <div class="span9">
+        <img src="@Url.Content(@Model.photo_url_o)" alt="@Model.name" />
+        <hr />
+        <div class="media">
+            @if (loggedInUser != null)
+            { 
+                <a class="pull-left" href="#">
+                    @if (!string.IsNullOrEmpty(loggedInUser.profile_photo))
+                    {
+                        <img src="@Url.Content(loggedInUser.profile_photo)" style="width:56px; height:56px;" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Images/user_profile.png")" />
+                    }
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="@Url.Content(string.Format("/User/{0}/Index", Session["LoggedInUser"].ToString()))">@Session["LoggedInUser"]</a></h4>
+                    <form name="frmComment" id="frmComment" action="@Url.Content(string.Format("/Photo/Comment"))" method="post">
+                        <textarea class="span8" id="comment_text" name="comment_text" placeholder="Add you comment"></textarea>
+                        <input type="submit" class="btn btn-primary" name="comment_btn" id="comment_btn" value="Comment" />
+                        <input type="hidden" name="user_id" id="user_id" value="@loggedInUser.id" />
+                        <input type="hidden" name="photo_id" id="photo_id" value="@Model.id" />
+                    </form>
+                </div>
+                <hr />
+            }
+        </div>
+        
+        <div id="comments">
+            @if (@Model.photo_comments != null)
+            {
+                foreach (var phComment in Model.photo_comments.OrderByDescending(pc => pc.comment.comment_datetime))
+                {
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        @if (!string.IsNullOrEmpty(phComment.comment.user.profile_photo))
+                        {
+                            <img src="@Url.Content(phComment.comment.user.profile_photo)" alt="@phComment.comment.user.membership.username"  />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Images/user_profile.png")" />
+                        }
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+
+                            <a href="@Url.Content(string.Format("/User/{0}/Index", phComment.comment.user.membership.username))">@phComment.comment.user.membership.username</a>
+
+                            <span style="font-size: small">@phComment.comment.comment_datetime</span>
+
+                        </h4>
+                        @phComment.comment.comment_text
+                    </div>
+                </div>
+                <hr />
+                }
+            }
+        </div>
+
+    </div>
+    <div class="span3 plan">
+        <div class="plan-name-silver">
+            <div class="row">
+                <div class="span1">
+                    @if (!string.IsNullOrEmpty(Model.user.profile_photo))
+                    {
+                        <img src="@Url.Content(Model.user.profile_photo)" style="width:56px; height:56px;"/>
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Images/user_profile.png")" style="width:56px; height:56px;"/>
+                    }
+                </div>
+                <div class="span1">
+
+                    @if (string.IsNullOrEmpty(@Model.user.first_name))
+                    { 
+                        <h4><a href="@Url.Content(string.Format("/User/{0}/Index/", Model.user.membership.username))">@Model.user.membership.username</a></h4>
+                    }
+                    else
+                    {
+                        <h4><a href="@Url.Content(string.Format("/User/{0}/Index/", Model.user.membership.username))">@Model.user.first_name @Model.user.last_name</a></h4>
+                    }
+
+                </div>
+            </div>
+            @if (Session["LoggedInUser"] != null)
+            {
+                <ul>
+                    <li class="plan-feature">
+                        @if (Model.user.membership.username == Session["LoggedInUser"].ToString())
+                        { 
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <a href="@Url.Content(string.Format("/Photo/Edit/{0}", @Model.id))" class="btn btn-primary">Edit Photo</a>
+                                <a href="@Url.Content(string.Format("/Photo/Delete/{0}", @Model.id))" class="btn btn-danger">Delete Photo</a>
+                            </div>
+                        </div>
+                        }
+                        else if ((bool)ViewBag.IsFollowing != true)
+                        {
+                        <a id="followBtn" href="@Url.Content(string.Format("/User/{0}/Follow/{1}",Session["LoggedInUser"].ToString(), @Model.user_id))" class="btn btn-primary btn-plan-select"><i class="icon-white icon-ok"></i>
+                            Follow</a>
+                        }
+                        else
+                        {
+                        <div>You are following</div>
+                        }
+                    </li>
+                </ul>
+            }
+        </div>
+        <hr />
+        <div class="plan-name-silver">
+            <div class="row">
+                <div class="span3" style="text-align: center">
+                    <h4>Statistic</h4>
+                </div>
+            </div>
+            <ul>
+                <li class="plan-feature">@Model.views_count<b>&nbsp;Views</b></li>
+                <li class="plan-feature"><span id="likes-count">@Model.likes_count</span> <b>&nbsp;Likes</b></li>
+                <li class="plan-feature"><span id="fav-count">@Model.favs_count</span><b>&nbsp;Favorites</b></li>
+                <li class="plan-feature"><span id="comment-count">@Model.comments_count</span><b>&nbsp;Comments</b></li>
+            </ul>
+        </div>
+        @if (Session["LoggedInUser"] != null)
+        {
+            <hr />
+            <div class="plan-name-silver">
+                <div class="row">
+                    <div class="span3" style="text-align: center">
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <a href="@Url.Content(string.Format("/Photo/Like/{0}", @Model.id))" id="likeBtn" class="btn btn-large btn-primary"><i class="icon-white icon-thumbs-up"></i>&nbsp;Like</a>
+                                <a href="@Url.Content(string.Format("/Photo/Fav/{0}", @Model.id))" id="favBtn" class="btn btn-large btn-primary"><i class="icon-white icon-heart"></i>&nbsp; Fav</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <hr />
+
+        <div class="plan-name-silver">
+            <div class="row">
+                <div class="span3" style="text-align: center">
+                    <h4>EXIF Data</h4>
+                </div>
+            </div>
+            @if (ViewBag.EXIF != null)
+            {
+                var exif = (exif_data)ViewBag.EXIF;
+                
+                <ul>
+                    <li class="plan-feature">Camera <b>@exif.camera</b></li>
+                    <li class="plan-feature">Focal Length <b>@exif.focal_length</b></li>
+                    <li class="plan-feature">Shutter Speed <b>@exif.shutter_speed</b></li>
+                    <li class="plan-feature">Aperture <b>@exif.aperture</b></li>
+                    <li class="plan-feature">ISO <b>@exif.iso</b></li>
+                    <li class="plan-feature">Category <b>@Model.category.category_name</b></li>
+                    <li class="plan-feature">Taken <b>@exif.date_taken</b></li>
+                    <li class="plan-feature">Uploaded on <b>@Model.uploaded_date</b></li>
+                </ul>
+            }
+            else
+            {
+                <ul>
+                    <li class="plan-feature">Camera <b>-</b></li>
+                    <li class="plan-feature">Focal Length <b>-</b></li>
+                    <li class="plan-feature">Shutter Speed <b>-</b></li>
+                    <li class="plan-feature">Aperture <b>-</b></li>
+                    <li class="plan-feature">ISO <b>-</b></li>
+                    <li class="plan-feature">Category <b>@Model.category.category_name</b></li>
+                    <li class="plan-feature">Taken <b>-</b></li>
+                    <li class="plan-feature">Uploaded on <b>@Model.uploaded_date</b></li>
+                </ul>
+            
+            }
+        </div>
+
+    </div>
+</div>
+
+
+@section ExtraScripts {
+    <script>
+        $(function () {
+            /*INSTEAD OF RETURNING HTML RESPONSE, future enhancement returning json data would be good */
+            $('#followBtn').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr("href")
+                }).done(function (data) {
+                    if (data == "SUCCESS") {
+                        alert("You are now following @Model.user.membership.username");
+                        $(this).css("display", "none");
+                        $('#followBtn').hide();
+                    }
+                });
+            });
+
+            $('#likeBtn').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr("href")
+                }).done(function (data) {
+                    if (data == "SUCCESS") {
+                        $('#likes-count').text(parseInt($('#likes-count').text()) + 1);
+                        alert("Thank you for your vote");
+                    } else {
+                        alert(data);
+                    }
+                });
+            });
+
+            $('#favBtn').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr("href")
+                }).done(function (data) {
+                    if (data == "SUCCESS") {
+                        var favCnt = parseInt($('#fav-count').text()) + 1;                        
+                        $('#fav-count').text(favCnt.toString());
+                        alert("Added to your favorite");
+                    } else {
+                        alert(data);
+                    }
+                });
+            });
+
+            $('#comment_btn').click(function (e) {
+                e.preventDefault();
+                if ($('#comment_text').val() == "") {
+                    alert("Please enter some comment");
+                    return false;
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: $('#frmComment').attr('action'),
+                        data: $("#frmComment").serialize(), // serializes the form's elements.
+                        success: function (data) {
+                            if (data != "FAILED") {
+                                $('#comments').prepend(data);
+                                $('#comment-count').text(parseInt($('#comment-count').text()) + 1);
+                                $('#comment_text').val("");
+                            } else {
+                                alert("Could not add your comment");
+                            }
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
+}

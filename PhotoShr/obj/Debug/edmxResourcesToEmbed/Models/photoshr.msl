@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="photoshareModelStoreContainer" CdmEntityContainer="photoshareEntities">
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="photoshareModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="collections">
+      <EntityTypeMapping TypeName="photoshareModel.collection">
+        <MappingFragment StoreEntitySet="collection">
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="collection_name" ColumnName="collection_name" />
+          <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="photoshareModel.comment">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="comment_text" ColumnName="comment_text" />
+          <ScalarProperty Name="comment_datetime" ColumnName="comment_datetime" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="exif_data">
+      <EntityTypeMapping TypeName="photoshareModel.exif_data">
+        <MappingFragment StoreEntitySet="exif_data">
+          <ScalarProperty Name="focal_length" ColumnName="focal_length" />
+          <ScalarProperty Name="date_taken" ColumnName="date_taken" />
+          <ScalarProperty Name="iso" ColumnName="iso" />
+          <ScalarProperty Name="shutter_speed" ColumnName="shutter_speed" />
+          <ScalarProperty Name="aperture" ColumnName="aperture" />
+          <ScalarProperty Name="camera" ColumnName="camera" />
+          <ScalarProperty Name="photo_id" ColumnName="photo_id" />
+          <ScalarProperty Name="exif_id" ColumnName="exif_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="followers">
+      <EntityTypeMapping TypeName="photoshareModel.follower">
+        <MappingFragment StoreEntitySet="followers">
+          <ScalarProperty Name="follower_whom" ColumnName="follower_whom" />
+          <ScalarProperty Name="follower_who" ColumnName="follower_who" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="group_members">
+      <EntityTypeMapping TypeName="photoshareModel.group_members">
+        <MappingFragment StoreEntitySet="group_members">
+          <ScalarProperty Name="joined_date" ColumnName="joined_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="groups">
+      <EntityTypeMapping TypeName="photoshareModel.group">
+        <MappingFragment StoreEntitySet="groups">
+          <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="memberships">
+      <EntityTypeMapping TypeName="photoshareModel.membership">
+        <MappingFragment StoreEntitySet="membership">
+          <ScalarProperty Name="joined_date" ColumnName="joined_date" />
+          <ScalarProperty Name="is_approved" ColumnName="is_approved" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="photo_comments">
+      <EntityTypeMapping TypeName="photoshareModel.photo_comments">
+        <MappingFragment StoreEntitySet="photo_comments">
+          <ScalarProperty Name="photo_id" ColumnName="photo_id" />
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="photos">
+      <EntityTypeMapping TypeName="photoshareModel.photo">
+        <MappingFragment StoreEntitySet="photos">
+          <ScalarProperty Name="popularity" ColumnName="popularity" />
+          <ScalarProperty Name="favs_count" ColumnName="favs_count" />
+          <ScalarProperty Name="comments_count" ColumnName="comments_count" />
+          <ScalarProperty Name="likes_count" ColumnName="likes_count" />
+          <ScalarProperty Name="views_count" ColumnName="views_count" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="photo_category" ColumnName="photo_category" />
+          <ScalarProperty Name="photo_url_s" ColumnName="photo_url_s" />
+          <ScalarProperty Name="photo_url_m" ColumnName="photo_url_m" />
+          <ScalarProperty Name="photo_url_o" ColumnName="photo_url_o" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="uploaded_date" ColumnName="uploaded_date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sets">
+      <EntityTypeMapping TypeName="photoshareModel.set">
+        <MappingFragment StoreEntitySet="sets">
+          <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+          <ScalarProperty Name="set_id" ColumnName="set_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stories">
+      <EntityTypeMapping TypeName="photoshareModel.story">
+        <MappingFragment StoreEntitySet="stories">
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+          <ScalarProperty Name="story_id" ColumnName="story_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="story_comments">
+      <EntityTypeMapping TypeName="photoshareModel.story_comments">
+        <MappingFragment StoreEntitySet="story_comments">
+          <ScalarProperty Name="story_id" ColumnName="story_id" />
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_activity">
+      <EntityTypeMapping TypeName="photoshareModel.user_activity">
+        <MappingFragment StoreEntitySet="user_activity">
+          <ScalarProperty Name="photo_id" ColumnName="photo_id" />
+          <ScalarProperty Name="activity_time" ColumnName="activity_time" />
+          <ScalarProperty Name="change_type" ColumnName="change_type" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="photoshareModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="profile_photo" ColumnName="profile_photo" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="about" ColumnName="about" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spPhotoDelete" FunctionName="photoshareModel.Store.spPhotoDelete" />
+    <EntitySetMapping Name="favorites">
+      <EntityTypeMapping TypeName="photoshareModel.favorite">
+        <MappingFragment StoreEntitySet="favorites">
+          <ScalarProperty Name="fav_datetime" ColumnName="fav_datetime" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="photo_id" ColumnName="photo_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="collection_photos">
+      <EntityTypeMapping TypeName="photoshareModel.collection_photos">
+        <MappingFragment StoreEntitySet="collection_photos">
+          <ScalarProperty Name="added_on" ColumnName="added_on" />
+          <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+          <ScalarProperty Name="photo_id" ColumnName="photo_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="likes">
+      <EntityTypeMapping TypeName="photoshareModel.like">
+        <MappingFragment StoreEntitySet="likes">
+          <ScalarProperty Name="like_datetime" ColumnName="like_datetime" />
+          <ScalarProperty Name="photo_id" ColumnName="photo_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

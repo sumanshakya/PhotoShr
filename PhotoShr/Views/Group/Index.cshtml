@@ -1,0 +1,34 @@
+﻿@model IEnumerable<PhotoShr.Models.group>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>All Groups</h1>
+<hr />
+<ul class="nav nav-pills">
+    <li class="active">@Html.ActionLink("All groups", "Index", "Group")</li>    
+
+    @if (Session["LoggedInUser"] != null)
+    {
+        <li class="pull-right">@Html.ActionLink("Create a group", "Create", "Group")</li>
+        <li class="pull-right"><a href="@Url.Content(string.Format("/User/{0}/Groups",Session["LoggedInUser"].ToString()))">Your Groups</a></li>
+    }
+</ul>
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {
+    <ul>
+        @foreach (var g in Model)
+        {
+            <li><a href="@Url.Content(string.Format("/Group/Details/{0}",g.id))">@g.collection.collection_name</a></li>
+        }
+    </ul>
+    }
+    else
+    {
+    <div class="alert alert-block alert-error fade in">
+        <h4 class="alert-heading">There are no groups at this moment</h4>
+    </div>
+    }
+}

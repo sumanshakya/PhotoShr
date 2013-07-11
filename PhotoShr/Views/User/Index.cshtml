@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PhotoShr.Models.photo>
+@{
+    ViewBag.Title = "Photos";
+}
+
+<h1>@ViewBag.Username -  Photos</h1>
+<hr />
+
+<ul class="nav nav-pills">
+    <li class="active"><a href="@Url.Content(string.Format("/User/{0}/Index/", ViewBag.Username))">Photos</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/Stories/", ViewBag.Username))">Stories</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/Sets/", ViewBag.Username))">Sets</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/Groups/", ViewBag.Username))">Groups</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/Favorites/", ViewBag.Username))">Favorites</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/RecentActivity/", ViewBag.Username))">Recent Activity</a></li>
+</ul>
+<div class="row-fluid">
+    <div class="span12">
+        @if (Model.Count() > 0)
+        {
+            <ul class="thumbnails">
+                @foreach (var picture in Model)
+                { 
+                    <li class="span3">
+                        <a href="@Url.Content(string.Format("/Photo/Details/{0}",picture.id))" class="thumbnail">
+                            <img src="@Url.Content(picture.photo_url_m)"  style="width: 260px; height: 180px;" alt="@picture.name" />
+                        </a>
+                    </li>
+                }
+            </ul>
+            
+        }
+        else
+        {
+            
+            <div class="alert alert-block alert-error fade in">
+                <h4 class="alert-heading">You havent uploaded any pictures</h4>
+                <p>Upload pictures to get started</p>
+                <p>
+                    <a class="btn btn-danger" href="@Url.Action("Upload","Photo")">Upload</a>
+                </p>
+            </div>
+        }
+
+    </div>
+</div>

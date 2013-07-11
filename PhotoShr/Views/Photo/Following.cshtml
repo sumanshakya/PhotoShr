@@ -1,0 +1,109 @@
+﻿@model PagedList.IPagedList<PhotoShr.Models.photo>
+@{
+    ViewBag.Title = "Photos from your friends";
+}
+
+@section ExtraScripts  {
+    <script>
+        $(function () {
+            $('#category').change(function () {
+                var url = $('#categoryForm').attr("action") + $('#category').val();
+                window.location.href = url;
+            });
+        });
+    </script>
+}
+
+<ul class="nav nav-pills">
+    <li><a href="@Url.Content(string.Format("/Photo/Index/{0}/{1}", ViewBag.Category, 1))">Popular</a></li>
+    <li><a href="@Url.Content(string.Format("/Photo/Recent/{0}/{1}", ViewBag.Category, 1))">Recent</a></li>
+    <li class="active"><a href="@Url.Content(string.Format("/Photo/Following/{0}/{1}", ViewBag.Category, 1))">Following</a></li>
+    <li class="pull-right">
+        <form method="get" id="categoryForm" action="@Url.Content("/Photo/Following/")">
+            @Html.DropDownList("category", (SelectList)ViewBag.Categories, "All Categories")
+        </form>
+    </li>
+</ul>
+<div class="row-fluid">
+    <div class="span12">
+        @if (Model.Count() > 0)
+        {
+            <ul class="thumbnails">
+                @foreach (var picture in Model)
+                { 
+                    <li class="span3 photo">
+                        <a href="@Url.Content(string.Format("/Photo/Details/{0}", picture.id))" class="thumbnail">
+                            <img src="@Url.Content(picture.photo_url_s)"  style="width: 260px; height: 180px;" alt="@picture.name" />
+                             <div class="caption">
+                                <blockquote>
+                                    <p>@picture.name</p>
+                                    <small>@picture.user.membership.username</small>                                    
+                                </blockquote>
+                            </div>
+                        </a>
+
+                    </li>
+                }
+            </ul>
+            
+        }
+        else
+        {
+            
+            <div class="alert alert-block alert-error fade in">
+                <h4 class="alert-heading">You are at the end of the page</h4>
+                <p>Upload more pictures to get started</p>
+                <p>
+                    <a class="btn btn-danger" href="@Url.Action("Upload", "Photo")">Upload</a>
+                </p>
+            </div>
+        }
+
+        <div class="pagination">
+            <ul>
+                @{
+                    if (Model.HasPreviousPage)
+                    {
+                    <li><span><a href="@Url.Content(string.Format("/Photo/Following/{0}/{1}", Html.Encode(ViewBag.Category), 1))">&lt;&lt;</a></span></li>
+                    }
+                    else
+                    {
+                    <li><span class="disabled">&lt;&lt;</span></li>
+                    }
+
+                    double pageCount = Model.TotalItemCount / Model.PageSize;
+                    int pages = (Int32)Math.Ceiling(pageCount);
+                    var isEven = pageCount % Model.PageCount;
+                    if (isEven > 0)
+                    {
+                        pages += 1;
+                    }
+
+                    for (int p = 1; p <= pages; p++)
+                    {
+                        if (Model.PageNumber == p)
+                        {
+                    <li class="active">
+                        <a href="@Url.Content(string.Format("/Photo/Following/{0}/{1}", Html.Encode(ViewBag.Category), p))">@p.ToString()</a></li>
+                        }
+                        else
+                        {
+                    <li>
+                        <a href="@Url.Content(string.Format("/Photo/Following/{0}/{1}", Html.Encode(ViewBag.Category), p))">@p.ToString()</a>
+                    </li>
+                        }
+                    }
+                    if (Model.HasNextPage)
+                    {
+                    <li><span>
+                        <a href="@Url.Content(string.Format("/Photo/Following/{0}/{1}", Html.Encode(ViewBag.Category), pages.ToString()))">&gt;&gt;</a></span></li>
+                    }
+                    else
+                    {
+                    <li><span class="disabled">&gt;&gt;</span></li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>

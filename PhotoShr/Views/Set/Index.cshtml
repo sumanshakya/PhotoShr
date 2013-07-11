@@ -1,0 +1,27 @@
+﻿@model PhotoShr.Models.set
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model != null)
+{
+    <h1>@Model.collection.collection_name</h1>
+    <small><a href="@Url.Content(string.Format("/User/{0}/Index", @Model.collection.user.membership.username))">@Model.collection.user.membership.username</a></small>
+    <hr />
+    
+    
+    <div class="row-fluid">
+        <ul class="thumbnails">
+            @foreach (var pic in Model.collection.collection_photos.Skip(0))
+            {
+                <li class="span12 thumbnail">
+                    <a href="@Url.Content(string.Format("/Photo/Details/{0}", @pic.photo_id))">
+                        <img src="@Url.Content(pic.photo.photo_url_o)" /></a>
+                    <div class="caption">
+                        <h5>@pic.photo.name</h5>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>    
+}

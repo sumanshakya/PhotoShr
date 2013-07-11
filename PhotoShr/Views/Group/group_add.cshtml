@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "add photos to group";
+    var grp = (PhotoShr.Models.group)ViewBag.Group;
+    bool isMember = false;
+    if (ViewBag.IsMember != null)
+    {
+        isMember = (bool)ViewBag.IsMember;
+    }
+}
+
+<h1>@grp.collection.collection_name / Add photos</h1>
+
+@using (Html.BeginForm("PhotoAdd","Group",FormMethod.Post))
+{    
+    
+    <input type="hidden" name="group_id" id="group_id" value="@grp.id" />
+    <input type="hidden" name="collection_id" id="collection_id" value="@grp.collection_id" />
+    <h3>
+        
+    </h3>
+    <div class="editor-label">
+        <label for="collection-photos">Your libary</label>
+    </div>
+    <div class="editor-field">
+        <select multiple="multiple" class="image-picker show-html" name="photos" id="photos">
+            @foreach (var item in (List<PhotoShr.Models.photo>)ViewBag.UserPhotos)
+            { 
+                <option data-img-src="@Url.Content(item.photo_url_s)" value="@item.id">@item.name</option>
+            }
+        </select>
+    </div>
+
+    <p>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </p>
+    
+}
+
+@section ExtraStyles {
+    <link href="@Url.Content("~/Styles/image-picker.css")" rel="stylesheet" />
+}
+
+@section ExtraScripts {
+    <script src="@Url.Content("~/Scripts/image-picker.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    
+    <script>
+        $(function () {
+            $("select.image-picker").imagepicker()
+        });
+    </script>
+
+}

@@ -1,0 +1,33 @@
+﻿@model PhotoShr.Models.comment
+@using PhotoShr.Models
+@{
+    Layout = null;
+    var user = (user)ViewBag.User;
+    var failedMsg = "FAILED";
+    }
+@if (Model != null)
+{
+    <div class="media">
+        <a class="pull-left" href="#">
+            @if (@user.profile_photo != null)
+            {
+                <img src="@Url.Content(@user.profile_photo)" />
+            }
+            else
+            {
+                <img src="@Url.Content("~/Images/user_profile.png")" />
+            }
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">
+
+                <a href="@Url.Content(string.Format("/User/{0}/Index", @user.membership.username))">@user.membership.username</a>
+
+                <span style="font-size: small">@Model.comment_datetime</span>
+            </h4>
+            @Model.comment_text
+        </div>
+    </div>
+} else {
+    @failedMsg
+}

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<PhotoShr.Models.collection_photos>
+@{    
+    var grp = (PhotoShr.Models.group)ViewBag.Group;
+    ViewBag.Title = "About " + grp.collection.collection_name;
+    bool isMember = false;
+    if (ViewBag.IsMember != null)
+    {
+        isMember = (bool)ViewBag.IsMember;
+    }
+}
+
+<h1>@grp.collection.collection_name</h1>
+<p>
+    Total group member :<b> @grp.group_members.Count()</b>
+    Total photos in this group : @grp.collection.collection_photos.Count()
+</p>
+<hr />
+<ul class="nav nav-pills">
+    <li class="active"><a href="@Url.Content(string.Format("/Group/Details/{0}?view=photos", grp.id))">Photos</a></li>
+    <li><a href="@Url.Content(string.Format("/Group/Details/{0}?view=members", grp.id))">Members</a></li>
+    <li><a href="@Url.Content(string.Format("/Group/Details/{0}?view=about", grp.id))">About</a></li>
+    @if (Session["LoggedInUser"] != null && !isMember)
+    {
+        <li class="pull-right"><a href="@Url.Content(string.Format("/Group/Details/{0}?view=join", grp.id))">Join this group</a></li>
+    }
+    else if (Session["LoggedInUser"] != null && isMember)
+    {
+        <li class="pull-right"><a href="@Url.Content(string.Format("/Group/Details/{0}?view=add", grp.id))">Add photo to group</a></li>
+    }
+</ul>
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {  
+    <div class="row-fluid">
+        <div class="span12">
+            <ul class="thumbnails">
+                @foreach (var ph in Model)
+                { 
+                    <li class="photo span2">
+                        <a href="@Url.Content(string.Format("/Photo/Details/{0}", ph.photo_id))" class="thumbnail">
+                            <img src="@Url.Content(ph.photo.photo_url_s)" alt="@ph.photo.name" />
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    }
+    else
+    {
+    <div class="alert alert-block alert-error fade in">
+        <h4 class="alert-heading">There are no photos in this group yet !</h4>
+    </div>
+    }
+}
+
+@section ExtraStyles {
+    <style>
+        .thumbnail {
+            position: relative;
+        }
+
+            .thumbnail p {
+                position: absolute;
+                bottom: 0;
+                left: 5px;
+                margin: 0px;
+                width: 260px;
+            }
+
+                .thumbnail p span {
+                    color: white;
+                    font: bold 14px/45px Helvetica, Sans-Serif;
+                    letter-spacing: -1px;
+                    background: rgb(0, 0, 0);
+                    background: rgba(0, 0, 0, 0.7);
+                    padding: 10px;
+                    width: 260px;
+                }
+    </style>
+}

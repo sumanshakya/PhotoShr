@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PhotoShr - @ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share your photos with awesome community">
+    <meta name="author" content="Suman Shakya">
+
+    <!-- Le styles -->
+    <link href="@Url.Content("~/Styles/bootstrap.min.css")" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        /*thumbail bug fix   https://github.com/twitter/bootstrap/issues/3494
+            */
+        ul.thumbnails li.span4:nth-child(3n + 4) {
+            margin-left: 0px;
+        }
+
+        ul.thumbnails li.span3:nth-child(4n + 5) {
+            margin-left: 0px;
+        }
+        ul.thumbnails li.span2:nth-child(6n + 7) {
+            margin-left: 0px;
+        }
+
+        ul.thumbnails li.span12 + li {
+            margin-left: 0px;
+        }
+        .validation-summary-errors, .field-validation-error {
+            color: red;
+        }
+         
+    </style>
+    <link href="@Url.Content("~/Styles/bootstrap-responsive.css")" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")"></script>
+    <![endif]-->
+    @if (IsSectionDefined("ExtraStyles"))
+    {
+        @RenderSection("ExtraStyles")
+    }
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.png")">
+</head>
+
+<body>
+
+    @Html.Partial("_MenuPartial")
+
+    <div class="container">
+        @RenderBody()
+
+        <hr>
+
+        <footer>
+            <p>&copy; PhotoShr 2013</p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+
+    @if (IsSectionDefined("ExtraScripts"))
+    {
+        @RenderSection("ExtraScripts")
+    }
+    <script>
+        $(function () {
+            $('.search-query').keypress(function (e) {
+                if (e.which == 13) {
+                    $('form.navbar-search').submit();
+                    return false;
+                }
+            });            
+        });
+    </script>
+</body>
+</html>

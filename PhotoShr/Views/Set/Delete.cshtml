@@ -1,0 +1,28 @@
+﻿@model PhotoShr.Models.set
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>set</legend>
+
+    <div class="display-label">set_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.set_id)
+    </div>
+
+    <div class="display-label">collection</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.collection.collection_name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59276c3068fc4feabd2ceae6f122e86c" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="photoshareModel.category" Width="1.5" PointX="3.25" PointY="19.25" />
+        <EntityTypeShape EntityType="photoshareModel.collection" Width="1.5" PointX="5.25" PointY="11.75" />
+        <EntityTypeShape EntityType="photoshareModel.comment" Width="1.5" PointX="5.25" PointY="23.125" />
+        <EntityTypeShape EntityType="photoshareModel.exif_data" Width="1.5" PointX="7.5" PointY="22.625" />
+        <EntityTypeShape EntityType="photoshareModel.follower" Width="1.5" PointX="5.25" PointY="26.125" />
+        <EntityTypeShape EntityType="photoshareModel.group_members" Width="1.5" PointX="9.75" PointY="12.875" />
+        <EntityTypeShape EntityType="photoshareModel.group" Width="1.5" PointX="7.5" PointY="9.625" />
+        <EntityTypeShape EntityType="photoshareModel.membership" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="photoshareModel.photo_comments" Width="1.5" PointX="7.5" PointY="19.375" />
+        <EntityTypeShape EntityType="photoshareModel.photo" Width="1.5" PointX="5.25" PointY="15.375" />
+        <EntityTypeShape EntityType="photoshareModel.set" Width="1.5" PointX="7.5" PointY="12.25" />
+        <EntityTypeShape EntityType="photoshareModel.story" Width="1.5" PointX="7.5" PointY="14.5" />
+        <EntityTypeShape EntityType="photoshareModel.story_comments" Width="1.5" PointX="9.75" PointY="19" />
+        <EntityTypeShape EntityType="photoshareModel.user_activity" Width="1.5" PointX="10.5" PointY="16" />
+        <EntityTypeShape EntityType="photoshareModel.user" Width="1.5" PointX="2.5" PointY="14.25" />
+        <AssociationConnector Association="photoshareModel.fk_photos_category" />
+        <AssociationConnector Association="photoshareModel.FK__collection" />
+        <AssociationConnector Association="photoshareModel.FK__collection_set" />
+        <AssociationConnector Association="photoshareModel.FK_collection_users" />
+        <AssociationConnector Association="photoshareModel.FK_groups_collection" />
+        <AssociationConnector Association="photoshareModel.FK__comments" />
+        <AssociationConnector Association="photoshareModel.FK_comments_users" />
+        <AssociationConnector Association="photoshareModel.FK_photo_comments_comments" />
+        <AssociationConnector Association="photoshareModel.FK_exif_data_photos" />
+        <AssociationConnector Association="photoshareModel.FK__users" />
+        <AssociationConnector Association="photoshareModel.FK__users_2" />
+        <AssociationConnector Association="photoshareModel.FK__gm_users" />
+        <AssociationConnector Association="photoshareModel.FK_group_members_groups" />
+        <AssociationConnector Association="photoshareModel.FK_users_membership" />
+        <AssociationConnector Association="photoshareModel.FK_photo_comments_photos" />
+        <AssociationConnector Association="photoshareModel.fk_activity_photo" />
+        <AssociationConnector Association="photoshareModel.FK_photo_users" />
+        <AssociationConnector Association="photoshareModel.FK__stories" />
+        <AssociationConnector Association="photoshareModel.fk_activity_user" />
+        <EntityTypeShape EntityType="photoshareModel.favorite" Width="1.5" PointX="12.5" PointY="13" />
+        <AssociationConnector Association="photoshareModel.FK_favorites_photos" />
+        <AssociationConnector Association="photoshareModel.FK_favorites_users" />
+        <EntityTypeShape EntityType="photoshareModel.collection_photos" Width="1.5" PointX="10.5" PointY="9.125" />
+        <EntityTypeShape EntityType="photoshareModel.like" Width="1.5" PointX="12.5" PointY="19" />
+        <AssociationConnector Association="photoshareModel.FK_group_photos_collection" />
+        <AssociationConnector Association="photoshareModel.FK_group_photos_photos" />
+        <AssociationConnector Association="photoshareModel.fk_like_photo" />
+        <AssociationConnector Association="photoshareModel.fk_like_user" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,99 @@
+﻿@model PhotoShr.Models.photo
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>photo</legend>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.views_count)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.views_count)
+            @Html.ValidationMessageFor(model => model.views_count)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.uploaded_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.uploaded_date)
+            @Html.ValidationMessageFor(model => model.uploaded_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user_id, "user")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("user_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.user_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.exif_data, "exif_data1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("exif_data", String.Empty)
+            @Html.ValidationMessageFor(model => model.exif_data)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.photo_url)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.photo_url)
+            @Html.ValidationMessageFor(model => model.photo_url)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.photo_category, "category")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("photo_category", String.Empty)
+            @Html.ValidationMessageFor(model => model.photo_category)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.tags)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.tags)
+            @Html.ValidationMessageFor(model => model.tags)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

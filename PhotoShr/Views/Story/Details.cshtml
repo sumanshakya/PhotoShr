@@ -1,0 +1,126 @@
+﻿@model PhotoShr.Models.story
+@using PhotoShr.Models
+@{
+    ViewBag.Title = "Details";
+    user loggedInUser = (user)ViewBag.LoggedUser;
+}
+<div class="row-fluid">
+
+    <h2>@Model.collection.collection_name</h2>
+    <br />
+    <span class="pull-left"><a href="@Url.Content(string.Format("/User/{0}/Index", @Model.collection.user.membership.username))">@Model.collection.user.membership.username</a></span>
+    <hr />
+    <p>
+        @Model.description
+    </p>
+    <div>
+
+        <span class="badge badge-success">Posted @Model.collection.created_date</span>
+        <div class="pull-right">
+            @if (!string.IsNullOrEmpty(Model.tags))
+            {
+                foreach (string tag in Model.tags.Split(','))
+                {
+                <span class="label">@tag</span> 
+                }
+            }
+        </div>
+    </div>
+    <br />
+    <ul class="thumbnails">
+        @foreach (var pic in Model.collection.collection_photos.Skip(0).Take(4))
+        {
+            <li class="span12 thumbnail">
+                <a href="@Url.Content(string.Format("/Photo/Details/{0}", @pic.photo_id))">
+                    <img src="@Url.Content(pic.photo.photo_url_o)" /></a>
+                <div class="caption">
+                    <h5>@pic.photo.name</h5>
+                </div>
+            </li>
+        }
+    </ul>
+    
+    <div class="media">
+        @if (loggedInUser != null)            
+        { 
+            <hr />
+            <a class="pull-left" href="#">
+                @if (!string.IsNullOrEmpty(loggedInUser.profile_photo))
+                {
+                    <img src="@Url.Content(loggedInUser.profile_photo)" style="width:56px; height:56px;" />
+                }
+                else
+                {
+                    <img src="@Url.Content("~/Images/user_profile.png")" />
+                }
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"><a href="@Url.Content(string.Format("/User/{0}/Index", Session["LoggedInUser"].ToString()))">@Session["LoggedInUser"]</a></h4>
+                <form name="frmComment" id="frmComment" action="@Url.Content(string.Format("/Story/Comment"))" method="post">
+                    <textarea class="span8" id="comment_text" name="comment_text" placeholder="Add you comment"></textarea>
+                    <input type="submit" class="btn btn-primary" name="comment_btn" id="comment_btn" value="Comment" />
+                    <input type="hidden" name="user_id" id="user_id" value="@loggedInUser.id" />
+                    <input type="hidden" name="story_id" id="story_id" value="@Model.story_id" />
+                    <input type="hidden" name="collection_id" id="collection_id" value="@Model.collection_id" />
+                </form>
+            </div>
+        }
+    </div>    
+    <div id="comments">
+        @if (@Model.story_comments != null)
+        {            
+            foreach (var stComment in Model.story_comments.OrderByDescending(sc => sc.comment.comment_datetime))
+            {
+            <div class="media">
+                <a class="pull-left" href="#">
+                    @if (!string.IsNullOrEmpty(stComment.comment.user.profile_photo))
+                    {
+                        <img src="@Url.Content(stComment.comment.user.profile_photo)" alt="@stComment.comment.user.membership.username"  />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Images/user_profile.png")" />
+                    }
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">
+
+                        <a href="@Url.Content(string.Format("/User/{0}/Index", stComment.comment.user.membership.username))">@stComment.comment.user.membership.username</a>
+
+                        <span style="font-size: small">@stComment.comment.comment_datetime</span>
+
+                    </h4>
+                    @stComment.comment.comment_text
+                </div>
+            </div>
+            <hr />
+            }
+        }
+    </div>
+</div>
+
+@section ExtraScripts {
+    <script>
+        $(function () {
+
+            $('#comment_btn').click(function (e) {
+                e.preventDefault();
+                if ($('#comment_text').val() == "") {
+                    alert("Please enter some comment");
+                    return false;
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: $('#frmComment').attr('action'),
+                        data: $("#frmComment").serialize(), // serializes the form's elements.
+                        success: function (data) {
+                            $('#comments').prepend(data);
+                            $('#comment_text').val("");
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
+}

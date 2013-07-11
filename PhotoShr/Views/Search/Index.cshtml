@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PhotoShr.Models.photo>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Search Results : @ViewBag.SearchQuery
+</h2>
+@if (Model != null)
+{
+    <h5>@Model.Count() results found</h5>
+}
+else
+{
+    <h5>0 result found</h5>
+}
+
+<div class="row-fluid">
+    <div class="span12">
+        @if (Model.Count() > 0)
+        {
+            <ul class="thumbnails">
+                @foreach (var picture in Model)
+                { 
+                    <li class="span3 photo">
+                        <a href="@Url.Content(string.Format("/Photo/Details/{0}", picture.id))" class="thumbnail">
+                            <img src="@Url.Content(picture.photo_url_m)"  style="width: 260px; height: 180px;" alt="@picture.name" />
+                            <div class="caption">
+                                <blockquote>
+                                    <p>@picture.name</p>
+                                    <small>@picture.user.membership.username</small>                                    
+                                </blockquote>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>            
+        }
+        else
+        {            
+            <div class="alert alert-block alert-error fade in">
+                <h4 class="alert-heading">No result found for your query</h4>
+            </div>
+        }
+        <hr />
+    </div>
+</div>

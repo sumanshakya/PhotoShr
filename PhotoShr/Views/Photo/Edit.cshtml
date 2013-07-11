@@ -1,0 +1,114 @@
+﻿@model PhotoShr.Models.photo
+@using PhotoShr.Models
+@{
+    ViewBag.Title = "Edit photo";
+    user loggedInUser = (user)ViewBag.LoggedUser;
+}
+
+@section ExtraStyles {
+    <style>
+        .plan-name-silver {
+            padding: 5px 5px 5px 2px;
+            -moz-border-radius: 5px 5px 0 0;
+            -webkit-border-radius: 5px 5px 0 0;
+            border-radius: 5px 5px 0 0;
+            margin: 0,0,10px,0;
+            background-color: #f3f3f3;
+            box-shadow: 0 0 6px 2px #b0b2ab;
+        }
+
+        .plan ul {
+            list-style: none;
+            margin: 0;
+            -moz-border-radius: 0 0 5px 5px;
+            -webkit-border-radius: 0 0 5px 5px;
+            border-radius: 0 0 5px 5px;
+            font-size: small;
+        }
+
+            .plan ul li.plan-feature {
+                padding: 5px;
+                border-top: 1px solid #c5c8c0;
+            }
+    </style>
+}
+<h1>Edit</h1>
+<hr />
+
+<div class="row">
+    <div class="span9">
+        <img src="@Url.Content(@Model.photo_url_o)" alt="@Model.name" />
+    </div>
+    <div class="span3 plan">
+        <div class="plan-name-silver">
+            <div class="row">
+                <div class="span3">
+                <h4>Details</h4></div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)                
+
+                @Html.HiddenFor(model => model.id)
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.name,"Title")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.name)
+                    @Html.ValidationMessageFor(model => model.name)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.description, "Description")
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.description, new { @rows="5"})
+                    @Html.ValidationMessageFor(model => model.description)
+                </div>
+    
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.photo_category, "Category")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("photo_category", String.Empty)
+                    @Html.ValidationMessageFor(model => model.photo_category)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.tags, "Tags")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.tags)
+                    @Html.ValidationMessageFor(model => model.tags)
+                </div>
+                
+                
+                <p>
+                    @Html.HiddenFor(model=>model.likes_count)
+                    @Html.HiddenFor(model=>model.views_count)
+                    @Html.HiddenFor(model=>model.user_id)
+                    @Html.HiddenFor(model=>model.photo_url_m)
+                    @Html.HiddenFor(model=>model.photo_url_o)
+                    @Html.HiddenFor(model=>model.photo_url_s)
+                    
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </p>
+                
+            }
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+@section ExtraScripts {
+    <script>
+        $(function () {
+                       
+        });
+    </script>
+}

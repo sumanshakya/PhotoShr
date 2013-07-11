@@ -1,0 +1,41 @@
+﻿@model PhotoShr.Models.group
+@{
+    ViewBag.Title = "Create group";
+}
+
+<h1>Create a group</h1>
+<hr />
+@section ExtraScripts {
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.collection.collection_name, "Name of your group")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.collection.collection_name, new { @class="span8"})
+            @Html.ValidationMessageFor(model => model.collection.collection_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description, "Say something about your group")
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.description, new { @class="span8",rows="10"})
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </p>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

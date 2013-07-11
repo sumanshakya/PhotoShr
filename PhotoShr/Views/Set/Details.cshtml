@@ -1,0 +1,25 @@
+﻿@model PhotoShr.Models.set
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>set</legend>
+
+    <div class="display-label">set_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.set_id)
+    </div>
+
+    <div class="display-label">collection</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.collection.collection_name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,63 @@
+﻿@model PhotoShr.Models.user
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>user</legend>
+
+    <div class="display-label">first_name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.first_name)
+    </div>
+
+    <div class="display-label">last_name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.last_name)
+    </div>
+
+    <div class="display-label">about</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.about)
+    </div>
+
+    <div class="display-label">gender</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gender)
+    </div>
+
+    <div class="display-label">city</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.city)
+    </div>
+
+    <div class="display-label">country</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.country)
+    </div>
+
+    <div class="display-label">profile_photo</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.profile_photo)
+    </div>
+
+    <div class="display-label">is_contact</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.is_contact)
+    </div>
+
+    <div class="display-label">membership</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.membership.username)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

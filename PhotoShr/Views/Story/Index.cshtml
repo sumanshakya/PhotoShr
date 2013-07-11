@@ -1,0 +1,102 @@
+﻿@model PagedList.IPagedList<PhotoShr.Models.story>
+@{
+    ViewBag.Title = "Stories";
+}
+<h1>Stories</h1>
+<hr />
+
+<div class="row-fluid">
+
+    @if (Model.Count() > 0)
+    {
+        double pageCount = Model.TotalItemCount / Model.PageSize;
+        <div class="span12">
+            @foreach (var userStory in Model)
+            { 
+                <h2><a href="@Url.Content(string.Format("/Story/Details/{0}", @userStory.story_id))">@userStory.collection.collection_name</a>
+                    <small>
+                        <a href="@Url.Content(string.Format("/User/{0}/Index", @userStory.collection.user.membership.username))">@userStory.collection.user.membership.username</a>
+                    </small>
+                </h2>
+                <ul class="thumbnails">
+                    @foreach (var pic in userStory.collection.collection_photos.Skip(0).Take(4))
+                    {
+                        <li class="span3 thumbnail">
+
+                            <img src="@Url.Content(pic.photo.photo_url_m)" />
+
+                        </li>                        
+                    }
+                </ul>
+                <p>
+                    @if (userStory.description.Length > 200)
+                    {
+                        <p>@userStory.description.Substring(0, 200) ...<a href="@Url.Content(string.Format("/Story/Details/{0}", @userStory.story_id))">read more</a></p>
+                    }
+                    else
+                    {
+                        <p>@userStory.description</p>
+                    }
+                </p>
+                <div>
+                    <span class="badge badge-success">Posted @userStory.collection.created_date</span>
+                    <span class="badge badge-success">@userStory.story_comments.Count() comments</span>
+                    <div class="pull-right">
+                        @if (!string.IsNullOrEmpty(userStory.tags))
+                        {
+                            foreach (string tag in userStory.tags.Split(','))
+                            {
+                            <span class="label">@tag</span> 
+                            }
+                        }
+                    </div>
+                </div> 
+                <hr />
+            }
+
+            <div class="pagination">
+                <ul>
+
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li><span><a href="@Url.Content("/stories/page/1")">&laquo;</a></span></li>
+                    }
+                    else
+                    {
+                        <li><span class="disabled">&laquo;</span></li>
+                    }
+
+
+                    @for (int p = 1; p < Math.Ceiling(pageCount); p++)
+                    {
+                        if (Model.PageNumber == p)
+                        {
+                        <li class="active"><a href="@Url.Content(string.Format("/stories/page/{0}", p))">@p.ToString()</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="@Url.Content(string.Format("/stories/page/{0}", p))">@p.ToString()</a></li>
+                        }
+                    }
+                    @if (Model.HasNextPage)
+                    {
+                        <li><span><a href="@Url.Content(string.Format("/stories/page/{0}", Math.Ceiling(pageCount).ToString()))">&gt; &gt;</a></span></li>
+                    }
+                    else
+                    {
+                        <li><span class="disabled">&gt; &gt;</span></li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+            
+        <div class="alert alert-block alert-error fade in">
+            <h4 class="alert-heading">You have not created any stories</h4>
+        </div>
+    }
+
+</div>

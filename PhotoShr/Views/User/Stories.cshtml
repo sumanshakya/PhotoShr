@@ -1,0 +1,55 @@
+﻿@model IEnumerable<PhotoShr.Models.story>
+@{
+    ViewBag.Title = "Stories";
+}
+
+<h1>@ViewBag.Username - Stories</h1>
+<hr>
+
+<ul class="nav nav-pills">    
+    <li><a href="@Url.Content(string.Format("/User/{0}/Index/", ViewBag.Username))">Photos</a></li>
+    <li class="active"><a href="@Url.Content(string.Format("/User/{0}/Stories/", ViewBag.Username))">Stories</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/Sets/", ViewBag.Username))">Sets</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/Groups/", ViewBag.Username))">Groups</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/Favorites/", ViewBag.Username))">Favorites</a></li>
+    <li><a href="@Url.Content(string.Format("/User/{0}/RecentActivity/", ViewBag.Username))">Recent Activity</a></li>
+    <li class="pull-right">@Html.ActionLink("Post a new story", "Create", "Story", null, new { @class = "btn" })</li>
+</ul>
+<div class="row-fluid">
+    <div class="span12">
+        @if (Model.Count() > 0)
+        {
+            foreach (var userStory in Model)
+            {
+            <h2><a href="@Url.Content(string.Format("/Story/Details/{0}",@userStory.story_id))">@userStory.collection.collection_name</a></h2>
+            <ul class="thumbnails">
+                @foreach (var pic in userStory.collection.collection_photos.Skip(0).Take(4))
+                {
+                    <li class="span3 thumbnail">
+
+                        <img src="@Url.Content(pic.photo.photo_url_m)" />
+
+                    </li>
+                }
+            </ul>
+            <p>
+                @userStory.description
+            </p>
+            <div>
+                <span class="badge badge-success">Posted @userStory.collection.created_date</span>
+                <div class="pull-right">
+                    @if (!string.IsNullOrEmpty(userStory.tags))
+                    {
+                        foreach (string tag in userStory.tags.Split(','))
+                        {
+                        <span class="label">@tag</span> 
+                        }
+                    }
+                </div>
+            </div> 
+            <hr />
+            }
+            
+        }
+    </div>
+</div>
